@@ -2,7 +2,7 @@ import './index.scss'
 import * as THREE from 'three'
 import { useCallback, useEffect,useRef} from 'react'
 import { LightShadow } from 'three'
-
+import Stats from '../../utils/stats'
 const Page =() =>{
     const Body = useRef()
     // 如果这样写的话每次都会实例化一次场景，所以要用Ref，这样只会在初始时实例化一次
@@ -13,6 +13,8 @@ const Page =() =>{
     const Meshs = useRef([]).current
     const Lights = useRef([]).current
     const id = useRef(null)
+    // 加入性能监控
+    let stats = new Stats();
 
     // 初始化
     const init = useCallback(()=>{
@@ -38,6 +40,8 @@ const Page =() =>{
 
     // 渲染画面
     const renderScene = useCallback(()=>{
+        // 每次渲染时更新stats
+        stats.update();
         Render.render(Scene, Camera)
         Meshs.forEach(item=>{
             item.rotation.x += 0.5/180*Math.PI
@@ -131,7 +135,12 @@ const Page =() =>{
     },[])
 
     useEffect(()=>{
-        console.log(1)
+        stats.setMode(0); // 0: fps, 1: ms
+        // 将性能监控屏区显示在左上角
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.bottom = '0px';
+        stats.domElement.style.zIndex = 100;
+        Body.current.append(stats.domElement);
         // 把渲染器加到Body的DOM节点里
         Body.current.append(Render.domElement)
         init()
