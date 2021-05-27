@@ -1,10 +1,10 @@
-import Light from './views/light'
+import Shadow from './views/shadow'
 
 
 function App() {
   
   return (
-    <Light />
+    <Shadow />
   );
 }
 
