@@ -1,10 +1,10 @@
-import Shadow from './views/rect'
+import Loader from './views/loader'
 
 
 function App() {
   
   return (
-    <Shadow />
+    <Loader />
   );
 }
 
