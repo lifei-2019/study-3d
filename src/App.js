@@ -1,4 +1,4 @@
-import Shadow from './views/shadow'
+import Shadow from './views/rect'
 
 
 function App() {
