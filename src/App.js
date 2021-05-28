@@ -1,10 +1,10 @@
-import Loader from './views/loader'
+import Animated from './views/animated'
 
 
 function App() {
   
   return (
-    <Loader />
+    <Animated />
   );
 }
 
